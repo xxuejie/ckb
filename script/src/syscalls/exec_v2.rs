@@ -74,16 +74,6 @@ where
         let offset = bounds >> 32;
         let length = bounds as u32 as u64;
 
-        // We are fetching the actual cell here for some in-place validation.
-        if !validate_offset_length(
-            machine,
-            self.snapshot2_context.clone(),
-            &data_piece_id,
-            offset,
-            length,
-        )? {
-            return Ok(true);
-        }
 
         let argc = machine.registers()[A4].to_u64();
         let argv = machine.registers()[A5].to_u64();
