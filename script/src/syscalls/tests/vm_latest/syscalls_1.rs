@@ -886,7 +886,7 @@ fn _test_load_tx_hash(data: &[u8]) -> Result<(), TestCaseError> {
     let tx_data = Arc::new(build_tx_data(rtx));
     let sg_data = build_sg_data(tx_data, vec![], vec![]);
 
-    let mut load_tx = LoadTx::new(&sg_data);
+    let mut load_tx = LoadTx::new(&sg_data.tx_data.rtx);
 
     prop_assert!(machine
         .memory_mut()
@@ -940,7 +940,7 @@ fn _test_load_tx(data: &[u8]) -> Result<(), TestCaseError> {
     let tx_data = Arc::new(build_tx_data(rtx));
     let sg_data = build_sg_data(tx_data, vec![], vec![]);
 
-    let mut load_tx = LoadTx::new(&sg_data);
+    let mut load_tx = LoadTx::new(&sg_data.tx_data.rtx);
 
     prop_assert!(machine
         .memory_mut()
@@ -1331,7 +1331,7 @@ fn _test_load_witness(data: &[u8], source: SourceEntry) -> Result<(), TestCaseEr
     let tx_data = Arc::new(build_tx_data(rtx));
     let sg_data = build_sg_data(tx_data, vec![], vec![]);
 
-    let mut load_witness = LoadWitness::new(&sg_data);
+    let mut load_witness = LoadWitness::new(&sg_data, &sg_data.tx_data.rtx);
 
     prop_assert!(machine
         .memory_mut()
@@ -1397,7 +1397,7 @@ fn _test_load_group_witness(data: &[u8], source: SourceEntry) -> Result<(), Test
     let tx_data = Arc::new(build_tx_data(rtx));
     let sg_data = build_sg_data(tx_data, vec![1], vec![1]);
 
-    let mut load_witness = LoadWitness::new(&sg_data);
+    let mut load_witness = LoadWitness::new(&sg_data, &sg_data.tx_data.rtx);
 
     prop_assert!(machine
         .memory_mut()
@@ -1992,7 +1992,7 @@ fn _test_load_input(
     let tx_data = Arc::new(build_tx_data(rtx));
     let sg_data = build_sg_data(tx_data, vec![0], vec![]);
 
-    let mut load_input = LoadInput::new(&sg_data);
+    let mut load_input = LoadInput::new(&sg_data, &sg_data.tx_data.rtx);
 
     let mut buffer = vec![];
     let expect = if let Some(field) = field {

@@ -3,7 +3,6 @@ use crate::{
     syscalls::{
         utils::store_data, LOAD_TRANSACTION_SYSCALL_NUMBER, LOAD_TX_HASH_SYSCALL_NUMBER, SUCCESS,
     },
-    types::SgData,
 };
 use ckb_types::{core::cell::ResolvedTransaction, prelude::*};
 use ckb_vm::{
@@ -18,9 +17,9 @@ pub struct LoadTx {
 }
 
 impl LoadTx {
-    pub fn new<DL>(sg_data: &Arc<SgData<DL>>) -> LoadTx {
+    pub fn new(rtx: &Arc<ResolvedTransaction>) -> LoadTx {
         LoadTx {
-            rtx: Arc::clone(&sg_data.tx_data.rtx),
+            rtx: Arc::clone(rtx),
         }
     }
 }

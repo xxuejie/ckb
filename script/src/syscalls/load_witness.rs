@@ -6,7 +6,10 @@ use crate::{
     },
     types::SgData,
 };
-use ckb_types::packed::{Bytes, BytesVec};
+use ckb_types::{
+    core::cell::ResolvedTransaction,
+    packed::{Bytes, BytesVec},
+};
 use ckb_vm::{
     registers::{A0, A3, A4, A7},
     Error as VMError, Register, SupportMachine, Syscalls,
@@ -15,19 +18,21 @@ use std::sync::Arc;
 
 #[derive(Debug)]
 pub struct LoadWitness<DL> {
+    rtx: Arc<ResolvedTransaction>,
     sg_data: Arc<SgData<DL>>,
 }
 
 impl<DL> LoadWitness<DL> {
-    pub fn new(sg_data: &Arc<SgData<DL>>) -> Self {
+    pub fn new(sg_data: &Arc<SgData<DL>>, rtx: &Arc<ResolvedTransaction>) -> Self {
         LoadWitness {
             sg_data: Arc::clone(sg_data),
+            rtx: Arc::clone(rtx),
         }
     }
 
     #[inline]
     fn witnesses(&self) -> BytesVec {
-        self.sg_data.rtx().transaction.witnesses()
+        self.rtx.transaction.witnesses()
     }
 
     fn fetch_witness(&self, source: Source, index: usize) -> Option<Bytes> {

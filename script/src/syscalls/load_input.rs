@@ -8,6 +8,7 @@ use crate::{
 };
 use byteorder::{LittleEndian, WriteBytesExt};
 use ckb_types::{
+    core::cell::ResolvedTransaction,
     packed::{CellInput, CellInputVec},
     prelude::*,
 };
@@ -19,19 +20,21 @@ use std::sync::Arc;
 
 #[derive(Debug)]
 pub struct LoadInput<DL> {
+    rtx: Arc<ResolvedTransaction>,
     sg_data: Arc<SgData<DL>>,
 }
 
 impl<DL> LoadInput<DL> {
-    pub fn new(sg_data: &Arc<SgData<DL>>) -> Self {
+    pub fn new(sg_data: &Arc<SgData<DL>>, rtx: &Arc<ResolvedTransaction>) -> Self {
         LoadInput {
             sg_data: Arc::clone(sg_data),
+            rtx: Arc::clone(rtx),
         }
     }
 
     #[inline]
     fn inputs(&self) -> CellInputVec {
-        self.sg_data.rtx().transaction.inputs()
+        self.rtx.transaction.inputs()
     }
 
     fn fetch_input(&self, source: Source, index: usize) -> Result<CellInput, u8> {
