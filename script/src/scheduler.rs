@@ -27,6 +27,7 @@ use std::sync::{
     atomic::{AtomicU64, Ordering},
     Arc, Mutex,
 };
+use std::rc::Rc;
 
 /// Root process's id.
 pub const ROOT_VM_ID: VmId = FIRST_VM_ID;
@@ -104,6 +105,9 @@ where
     /// MessageBox is expected to be empty before returning from `run`
     /// function, there is no need to persist messages.
     pub message_box: Arc<Mutex<Vec<Message>>>,
+
+    /// Test value for Send
+    pub test_value: Rc<u64>,
 }
 
 impl<DL> Scheduler<DL>
@@ -126,6 +130,7 @@ where
             suspended: BTreeMap::default(),
             message_box: Arc::new(Mutex::new(Vec::new())),
             terminated_vms: BTreeMap::default(),
+            test_value: Rc::new(3),
         }
     }
 
@@ -174,6 +179,7 @@ where
                 .collect(),
             message_box: Arc::new(Mutex::new(Vec::new())),
             terminated_vms: full.terminated_vms.into_iter().collect(),
+            test_value: Rc::new(3),
         };
         scheduler
             .ensure_vms_instantiated(&full.instantiated_ids)

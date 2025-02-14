@@ -613,16 +613,23 @@ where
         max_cycles: Cycle,
         signal: &mut Receiver<ChunkCommand>,
     ) -> Result<Cycle, ScriptError> {
-        let mut scheduler = self.create_scheduler(script_group)?;
         let mut pause = VMPause::new();
         let child_pause = pause.clone();
         let (finish_tx, mut finish_rx) = oneshot::channel::<Result<(i8, Cycle), ckb_vm::Error>>();
+
+        let sg_data = SgData::new(&self.tx_data, script_group)?;
+        let debug_context = DebugContext {
+            debug_printer: Arc::clone(&self.debug_printer),
+            #[cfg(test)]
+            skip_pause: Arc::clone(&self.skip_pause),
+        };
 
         // send initial `Resume` command to child
         // it's maybe useful to set initial command to `signal.borrow().to_owned()`
         // so that we can control the initial state of child, which is useful for testing purpose
         let (child_tx, mut child_rx) = watch::channel(ChunkCommand::Resume);
         let jh = tokio::spawn(async move {
+            let mut scheduler = Scheduler::new(sg_data, debug_context);
             child_rx.mark_changed();
             loop {
                 let pause_cloned = child_pause.clone();
