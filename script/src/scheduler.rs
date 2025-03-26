@@ -49,12 +49,12 @@ where
     M: DefaultMachineRunner,
 {
     /// Immutable context data for current running transaction & script.
-    pub sg_data: SgData<DL>,
+    sg_data: SgData<DL>,
 
     /// Syscall generator
-    pub syscall_generator: SyscallGenerator<DL, V, M::Inner>,
+    syscall_generator: SyscallGenerator<DL, V, M::Inner>,
     /// Syscall generator context
-    pub syscall_context: V,
+    syscall_context: V,
 
     /// Total cycles. When a scheduler executes, there are 3 variables
     /// that might all contain charged cycles: +total_cycles+,
@@ -84,29 +84,29 @@ where
     ///
     /// One can consider that +total_cycles+ contains the total cycles
     /// consumed in current scheduler, when the scheduler is not busy executing.
-    pub total_cycles: Arc<AtomicU64>,
+    total_cycles: Arc<AtomicU64>,
     /// Iteration cycles, see +total_cycles+ on its usage
-    pub iteration_cycles: Cycle,
+    iteration_cycles: Cycle,
     /// Next vm id used by spawn.
-    pub next_vm_id: VmId,
+    next_vm_id: VmId,
     /// Next fd used by pipe.
-    pub next_fd_slot: u64,
+    next_fd_slot: u64,
     /// Used to store VM state.
-    pub states: BTreeMap<VmId, VmState>,
+    states: BTreeMap<VmId, VmState>,
     /// Used to confirm the owner of fd.
-    pub fds: BTreeMap<Fd, VmId>,
+    fds: BTreeMap<Fd, VmId>,
     /// Verify the VM's inherited fd list.
-    pub inherited_fd: BTreeMap<VmId, Vec<Fd>>,
+    inherited_fd: BTreeMap<VmId, Vec<Fd>>,
     /// Instantiated vms.
-    pub instantiated: BTreeMap<VmId, (VmContext<DL>, M)>,
+    instantiated: BTreeMap<VmId, (VmContext<DL>, M)>,
     /// Suspended vms.
-    pub suspended: BTreeMap<VmId, Snapshot2<DataPieceId>>,
+    suspended: BTreeMap<VmId, Snapshot2<DataPieceId>>,
     /// Terminated vms.
-    pub terminated_vms: BTreeMap<VmId, i8>,
+    terminated_vms: BTreeMap<VmId, i8>,
 
     /// MessageBox is expected to be empty before returning from `run`
     /// function, there is no need to persist messages.
-    pub message_box: Arc<Mutex<Vec<Message>>>,
+    message_box: Arc<Mutex<Vec<Message>>>,
 }
 
 impl<DL, V, M> Scheduler<DL, V, M>
@@ -147,6 +147,33 @@ where
     /// Return total cycles.
     pub fn consumed_cycles(&self) -> Cycle {
         self.total_cycles.load(Ordering::Acquire)
+    }
+
+    /// Fetch specified VM state
+    pub fn state(&self, vm_id: &VmId) -> Option<VmState> {
+        self.states.get(vm_id).cloned()
+    }
+
+    /// This function provides a peek into one of the current created
+    /// VM. Depending on the actual state, the VM might either be instantiated
+    /// or suspended. As a result, 2 callback functions must be provided to handle
+    /// both cases. The function only provides a *peek*, meaning the caller must
+    /// not make any changes to an instantiated VMs. the VM is passed as a mutable
+    /// reference only because memory load functions in CKB-VM require mutable
+    /// references. It does not mean the caller can modify the VM in any sense.
+    /// Even a slight tampering of the VM can result in non-determinism.
+    pub fn peek<F, G, W>(&mut self, vm_id: &VmId, mut f: F, mut g: G) -> Result<W, Error>
+    where
+        F: FnMut(&mut M) -> Result<W, Error>,
+        G: FnMut(&Snapshot2<DataPieceId>, &SgData<DL>) -> Result<W, Error>,
+    {
+        if let Some((_, machine)) = self.instantiated.get_mut(vm_id) {
+            return f(machine);
+        }
+        if let Some(snapshot) = self.suspended.get(vm_id) {
+            return g(snapshot, &self.sg_data);
+        }
+        Err(Error::Unexpected(format!("VM {} does not exist!", vm_id)))
     }
 
     /// Add cycles to total cycles.
