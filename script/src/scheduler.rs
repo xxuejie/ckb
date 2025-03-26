@@ -855,7 +855,7 @@ where
     }
 
     /// Ensure corresponding VM is instantiated and return a mutable reference to it
-    pub fn ensure_get_instantiated(&mut self, id: &VmId) -> Result<&mut (VmContext<DL>, M), Error> {
+    fn ensure_get_instantiated(&mut self, id: &VmId) -> Result<&mut (VmContext<DL>, M), Error> {
         self.ensure_vms_instantiated(&[*id])?;
         self.instantiated
             .get_mut(id)
