@@ -154,6 +154,11 @@ where
         self.states.get(vm_id).cloned()
     }
 
+    /// Access the SgData data structure
+    pub fn sg_data(&self) -> &SgData<DL> {
+        &self.sg_data
+    }
+
     /// This function provides a peek into one of the current created
     /// VM. Depending on the actual state, the VM might either be instantiated
     /// or suspended. As a result, 2 callback functions must be provided to handle
