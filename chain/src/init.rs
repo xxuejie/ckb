@@ -22,6 +22,15 @@ use std::thread;
 const ORPHAN_BLOCK_SIZE: usize = BLOCK_DOWNLOAD_WINDOW as usize;
 
 pub fn start_chain_services(builder: ChainServicesBuilder) -> ChainController {
+    let (chain_service, chain_service_thread) = start_chain_services_for_test(builder);
+    register_thread("ChainService", chain_service_thread);
+
+    chain_service
+}
+
+pub fn start_chain_services_for_test(
+    builder: ChainServicesBuilder,
+) -> (ChainController, thread::JoinHandle<()>) {
     let orphan_blocks_broker = Arc::new(OrphanBlockPool::with_capacity(ORPHAN_BLOCK_SIZE));
 
     let (truncate_block_tx, truncate_block_rx) = channel::bounded(1);
@@ -129,7 +138,6 @@ pub fn start_chain_services(builder: ChainServicesBuilder) -> ChainController {
             }
         })
         .expect("start chain_service thread should ok");
-    register_thread("ChainService", chain_service_thread);
 
-    chain_controller
+    (chain_controller, chain_service_thread)
 }

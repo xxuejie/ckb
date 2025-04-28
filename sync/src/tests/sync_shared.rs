@@ -81,15 +81,17 @@ fn test_insert_invalid_block() {
 #[test]
 fn test_insert_parent_unknown_block() {
     let (shared1, _) = build_chain(2);
-    let (shared, chain) = {
+    let (shared, chain, join_handle) = {
         let (shared, mut pack) = SharedBuilder::with_temp_db()
             .consensus(shared1.consensus().clone())
             .build()
             .unwrap();
-        let chain_controller = start_chain_services(pack.take_chain_services_builder());
+        let (chain_controller, handle) =
+            ckb_chain::start_chain_services_for_test(pack.take_chain_services_builder());
         (
             SyncShared::new(shared, Default::default(), pack.take_relay_tx_receiver()),
             chain_controller,
+            handle,
         )
     };
 
@@ -181,6 +183,9 @@ fn test_insert_parent_unknown_block() {
         &parent_hash,
         BlockStatus::BLOCK_VALID
     ));
+
+    drop(chain);
+    let _ = join_handle.join();
 }
 
 #[test]
