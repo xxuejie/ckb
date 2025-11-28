@@ -2,7 +2,7 @@ use crate::{LonelyBlockHash, UnverifiedBlock};
 use ckb_channel::{Receiver, Sender};
 use ckb_logger::{debug, info};
 use ckb_shared::Shared;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use crossbeam::select;
 use std::sync::Arc;
 

@@ -1,7 +1,7 @@
 use crate::error::Error;
 
 use ckb_db_schema::Col;
-use ckb_store::{ChainStore, Freezer, StoreCache};
+use ckb_store::{DatabaseStore, Freezer, StoreCache};
 use rocksdb::{
     ColumnFamilyDescriptor, DBIterator, DBPinnableSlice, IteratorMode,
     SecondaryDB as SecondaryRocksDB, SecondaryOpenDescriptor, ops::OpenCF, prelude::*,
@@ -103,7 +103,7 @@ impl SecondaryDB {
     }
 }
 
-impl ChainStore for SecondaryDB {
+impl DatabaseStore for SecondaryDB {
     fn cache(&self) -> Option<&StoreCache> {
         None
     }
@@ -121,3 +121,4 @@ impl ChainStore for SecondaryDB {
         self.iter(col, mode).expect("db operation should be ok")
     }
 }
+ckb_store::impl_chain_store_for_db_store!(SecondaryDB);

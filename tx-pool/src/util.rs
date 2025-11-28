@@ -4,8 +4,7 @@ use ckb_chain_spec::consensus::Consensus;
 use ckb_dao::DaoCalculator;
 use ckb_script::ChunkCommand;
 use ckb_snapshot::Snapshot;
-use ckb_store::ChainStore;
-use ckb_store::data_loader_wrapper::AsDataLoader;
+use ckb_traits::{AsDataLoader, ChainStore};
 use ckb_types::core::{
     Capacity, Cycle, TransactionView, cell::ResolvedTransaction, tx_pool::TRANSACTION_SIZE_LIMIT,
 };

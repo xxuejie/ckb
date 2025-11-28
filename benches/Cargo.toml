@@ -17,6 +17,7 @@ ckb-chain.workspace = true
 ckb-types.workspace = true
 ckb-shared.workspace = true
 ckb-store.workspace = true
+ckb-traits.workspace = true
 ckb-chain-spec.workspace = true
 rand.workspace = true
 ckb-hash.workspace = true

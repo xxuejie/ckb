@@ -15,16 +15,18 @@ use ckb_merkle_mountain_range::{
     Error as MMRError, MMRStore, Result as MMRResult, leaf_index_to_mmr_size,
 };
 use ckb_proposal_table::ProposalView;
-use ckb_store::{ChainStore, StoreCache, StoreSnapshot};
-use ckb_traits::{HeaderFields, HeaderFieldsProvider, HeaderProvider};
+use ckb_store::{DatabaseStore, StoreCache, StoreSnapshot};
+use ckb_traits::{ChainStore, HeaderFields, HeaderFieldsProvider, HeaderProvider};
 use ckb_types::core::error::OutPointError;
 use ckb_types::{
     U256,
+    bytes::Bytes,
     core::{
-        BlockNumber, EpochExt, HeaderView, TransactionView, Version,
-        cell::{CellChecker, CellProvider, CellStatus, HeaderChecker},
+        BlockExt, BlockNumber, BlockView, EpochExt, EpochNumber, HeaderView, TransactionInfo,
+        TransactionView, UncleBlockVecView, Version,
+        cell::{CellChecker, CellMeta, CellProvider, CellStatus, HeaderChecker},
     },
-    packed::{Byte32, HeaderDigest, OutPoint},
+    packed::{self, Byte32, HeaderDigest, OutPoint, ProposalShortIdVec},
     utilities::merkle_mountain_range::ChainRootMMR,
 };
 use std::hash::{Hash, Hasher};
@@ -184,7 +186,7 @@ impl Snapshot {
     }
 }
 
-impl ChainStore for Snapshot {
+impl DatabaseStore for Snapshot {
     fn cache(&self) -> Option<&StoreCache> {
         self.store.cache()
     }
@@ -200,13 +202,158 @@ impl ChainStore for Snapshot {
     fn get_iter(&self, col: Col, mode: IteratorMode) -> DBIter {
         self.store.get_iter(col, mode)
     }
+}
 
+impl ChainStore for Snapshot {
     fn get_tip_header(&self) -> Option<HeaderView> {
         Some(self.tip_header.clone())
     }
 
     fn get_current_epoch_ext(&self) -> Option<EpochExt> {
         Some(self.epoch_ext.clone())
+    }
+
+    fn get_block(&self, h: &Byte32) -> Option<BlockView> {
+        self.store.get_block(h)
+    }
+
+    fn get_block_header(&self, hash: &Byte32) -> Option<HeaderView> {
+        self.store.get_block_header(hash)
+    }
+
+    fn get_block_body(&self, hash: &Byte32) -> Vec<TransactionView> {
+        self.store.get_block_body(hash)
+    }
+
+    fn get_unfrozen_block(&self, hash: &Byte32) -> Option<BlockView> {
+        self.store.get_unfrozen_block(hash)
+    }
+
+    fn get_block_txs_hashes(&self, hash: &Byte32) -> Vec<Byte32> {
+        self.store.get_block_txs_hashes(hash)
+    }
+
+    fn get_block_proposal_txs_ids(&self, hash: &Byte32) -> Option<ProposalShortIdVec> {
+        self.store.get_block_proposal_txs_ids(hash)
+    }
+
+    fn get_block_uncles(&self, hash: &Byte32) -> Option<UncleBlockVecView> {
+        self.store.get_block_uncles(hash)
+    }
+
+    fn get_block_extension(&self, hash: &packed::Byte32) -> Option<packed::Bytes> {
+        self.store.get_block_extension(hash)
+    }
+
+    fn get_block_ext(&self, block_hash: &packed::Byte32) -> Option<BlockExt> {
+        self.store.get_block_ext(block_hash)
+    }
+
+    fn get_block_hash(&self, number: BlockNumber) -> Option<packed::Byte32> {
+        self.store.get_block_hash(number)
+    }
+
+    fn get_block_number(&self, hash: &packed::Byte32) -> Option<BlockNumber> {
+        self.store.get_block_number(hash)
+    }
+
+    fn is_main_chain(&self, hash: &packed::Byte32) -> bool {
+        self.store.is_main_chain(hash)
+    }
+
+    fn transaction_exists(&self, hash: &packed::Byte32) -> bool {
+        self.store.transaction_exists(hash)
+    }
+
+    fn get_transaction(&self, hash: &packed::Byte32) -> Option<(TransactionView, packed::Byte32)> {
+        self.store.get_transaction(hash)
+    }
+
+    fn get_transaction_info(&self, hash: &packed::Byte32) -> Option<TransactionInfo> {
+        self.store.get_transaction_info(hash)
+    }
+
+    fn get_transaction_with_info(
+        &self,
+        hash: &packed::Byte32,
+    ) -> Option<(TransactionView, TransactionInfo)> {
+        self.store.get_transaction_with_info(hash)
+    }
+
+    fn have_cell(&self, out_point: &OutPoint) -> bool {
+        self.store.have_cell(out_point)
+    }
+
+    fn get_cell(&self, out_point: &OutPoint) -> Option<CellMeta> {
+        self.store.get_cell(out_point)
+    }
+
+    fn get_cell_data(&self, out_point: &OutPoint) -> Option<(Bytes, packed::Byte32)> {
+        self.store.get_cell_data(out_point)
+    }
+
+    fn get_cell_data_hash(&self, out_point: &OutPoint) -> Option<packed::Byte32> {
+        self.store.get_cell_data_hash(out_point)
+    }
+
+    fn get_epoch_ext(&self, hash: &packed::Byte32) -> Option<EpochExt> {
+        self.store.get_epoch_ext(hash)
+    }
+
+    fn get_epoch_index(&self, number: EpochNumber) -> Option<packed::Byte32> {
+        self.store.get_epoch_index(number)
+    }
+
+    fn get_block_epoch_index(&self, block_hash: &packed::Byte32) -> Option<packed::Byte32> {
+        self.store.get_block_epoch_index(block_hash)
+    }
+
+    fn get_block_epoch(&self, hash: &packed::Byte32) -> Option<EpochExt> {
+        self.store.get_block_epoch(hash)
+    }
+
+    fn is_uncle(&self, hash: &packed::Byte32) -> bool {
+        self.store.is_uncle(hash)
+    }
+
+    fn get_uncle_header(&self, hash: &packed::Byte32) -> Option<HeaderView> {
+        self.store.get_uncle_header(hash)
+    }
+
+    fn block_exists(&self, hash: &packed::Byte32) -> bool {
+        self.store.block_exists(hash)
+    }
+
+    fn get_cellbase(&self, hash: &packed::Byte32) -> Option<TransactionView> {
+        self.store.get_cellbase(hash)
+    }
+
+    fn get_latest_built_filter_data_block_hash(&self) -> Option<packed::Byte32> {
+        self.store.get_latest_built_filter_data_block_hash()
+    }
+
+    fn get_block_filter(&self, hash: &packed::Byte32) -> Option<packed::Bytes> {
+        self.store.get_block_filter(hash)
+    }
+
+    fn get_block_filter_hash(&self, hash: &packed::Byte32) -> Option<packed::Byte32> {
+        self.store.get_block_filter_hash(hash)
+    }
+
+    fn get_packed_block(&self, hash: &packed::Byte32) -> Option<packed::Block> {
+        self.store.get_packed_block(hash)
+    }
+
+    fn get_packed_block_header(&self, hash: &packed::Byte32) -> Option<packed::Header> {
+        self.store.get_packed_block_header(hash)
+    }
+
+    fn get_header_digest(&self, position_u64: u64) -> Option<packed::HeaderDigest> {
+        self.store.get_header_digest(position_u64)
+    }
+
+    fn get_ancestor(&self, base: &packed::Byte32, number: BlockNumber) -> Option<HeaderView> {
+        self.store.get_ancestor(base, number)
     }
 }
 

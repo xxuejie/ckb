@@ -4,9 +4,9 @@ use crate::{ChainServiceScope, UnverifiedBlock};
 use ckb_chain_spec::consensus::{Consensus, ProposalWindow};
 use ckb_proposal_table::ProposalTable;
 use ckb_shared::SharedBuilder;
-use ckb_store::ChainStore;
 use ckb_systemtime::unix_time_as_millis;
 use ckb_test_chain_utils::{MockChain, MockStore};
+use ckb_traits::ChainStore;
 use ckb_types::{
     U256,
     core::{BlockBuilder, BlockExt, BlockView},

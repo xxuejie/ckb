@@ -1,10 +1,10 @@
 use crate::tests::util::start_chain;
 use ckb_error::assert_error_eq;
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{
     MockChain, MockStore, create_cellbase, create_multi_outputs_transaction, create_transaction,
     create_transaction_with_out_point, dao_data,
 };
+use ckb_traits::ChainStore;
 use ckb_types::core::error::OutPointError;
 use ckb_types::{core::BlockBuilder, packed::OutPoint};
 use ckb_verification_traits::Switch;

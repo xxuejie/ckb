@@ -14,8 +14,9 @@ use ckb_logger::debug;
 use ckb_notify::NotifyController;
 use ckb_proposal_table::ProposalView;
 use ckb_stop_handler::{new_crossbeam_exit_rx, register_thread};
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::{ChainDB, DatabaseStore};
 use ckb_systemtime::unix_time_as_millis;
+use ckb_traits::ChainStore;
 use ckb_tx_pool::{BlockTemplate, TokioRwLock, TxPoolController};
 use ckb_types::{
     H256, U256,

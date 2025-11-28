@@ -1,8 +1,8 @@
 #![allow(clippy::inconsistent_digit_grouping)]
 
 use ckb_chain_spec::consensus::build_genesis_epoch_ext;
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::always_success_consensus;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{Capacity, EpochNumberWithFraction},
     utilities::DIFF_TWO,

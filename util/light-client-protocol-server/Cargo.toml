@@ -14,6 +14,7 @@ ckb-shared.workspace = true
 ckb-logger.workspace = true
 ckb-types.workspace = true
 ckb-store.workspace = true
+ckb-traits.workspace = true
 ckb-merkle-mountain-range.workspace = true
 ckb-systemtime.workspace = true
 

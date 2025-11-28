@@ -7,7 +7,7 @@ use std::sync::Arc;
 use ckb_logger::{debug, error, info, trace, warn};
 use ckb_network::{CKBProtocolContext, CKBProtocolHandler, PeerIndex, async_trait, bytes::Bytes};
 use ckb_shared::Shared;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{core, packed, prelude::*};
 
 use crate::prelude::*;

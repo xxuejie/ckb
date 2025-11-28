@@ -11,7 +11,7 @@ use ckb_app_config::TxPoolConfig;
 use ckb_fee_estimator::Error as FeeEstimatorError;
 use ckb_logger::{debug, error, warn};
 use ckb_snapshot::Snapshot;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::core::tx_pool::PoolTxDetailInfo;
 use ckb_types::core::{BlockNumber, CapacityError, FeeRate};
 use ckb_types::packed::OutPoint;

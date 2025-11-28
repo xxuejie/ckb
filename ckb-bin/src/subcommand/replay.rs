@@ -4,7 +4,7 @@ use ckb_chain::ChainController;
 use ckb_chain_iter::ChainIterator;
 use ckb_instrument::{ProgressBar, ProgressStyle};
 use ckb_shared::{ChainServicesBuilder, Shared, SharedBuilder};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_verification_traits::Switch;
 use std::sync::Arc;
 

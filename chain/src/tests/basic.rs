@@ -4,12 +4,12 @@ use ckb_chain_spec::consensus::{Consensus, ConsensusBuilder};
 use ckb_dao_utils::genesis_dao_data;
 use ckb_error::assert_error_eq;
 use ckb_shared::shared::Shared;
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{
     MockChain, MockStore, create_always_success_tx, create_cellbase,
     create_multi_outputs_transaction, create_transaction, create_transaction_with_out_point,
     dao_data,
 };
+use ckb_traits::ChainStore;
 use ckb_types::core::error::OutPointError;
 use ckb_types::prelude::*;
 use ckb_types::{

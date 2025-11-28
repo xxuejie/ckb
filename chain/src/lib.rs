@@ -27,7 +27,8 @@ pub mod verify;
 
 pub use chain_controller::ChainController;
 use ckb_logger::{error, info};
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::{BlockNumberAndHash, H256};
 pub use init::{ChainServiceScope, build_chain_services, start_chain_services};
 

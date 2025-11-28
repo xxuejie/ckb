@@ -4,7 +4,8 @@ use ckb_db_migration::{Migration, ProgressBar, ProgressStyle};
 use ckb_db_schema::COLUMN_BLOCK_FILTER_HASH;
 use ckb_error::Error;
 use ckb_hash::blake2b_256;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::prelude::Entity;
 use std::sync::Arc;
 

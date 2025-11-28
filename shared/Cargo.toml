@@ -12,6 +12,7 @@ repository = "https://github.com/nervosnetwork/ckb"
 ckb-types.workspace = true
 ckb-chain-spec.workspace = true
 ckb-store.workspace = true
+ckb-traits.workspace = true
 ckb-db.workspace = true
 ckb-proposal-table.workspace = true
 arc-swap.workspace = true

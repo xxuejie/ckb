@@ -1,5 +1,5 @@
 use crate::cache::StoreCache;
-use crate::store::ChainStore;
+use crate::store::DatabaseStore;
 use ckb_db::{
     DBPinnableSlice, RocksDBSnapshot,
     iter::{DBIter, DBIterator, IteratorMode},
@@ -15,7 +15,7 @@ pub struct StoreSnapshot {
     pub(crate) cache: Arc<StoreCache>,
 }
 
-impl ChainStore for StoreSnapshot {
+impl DatabaseStore for StoreSnapshot {
     fn cache(&self) -> Option<&StoreCache> {
         Some(&self.cache)
     }
@@ -36,3 +36,4 @@ impl ChainStore for StoreSnapshot {
             .expect("db operation should be ok")
     }
 }
+crate::impl_chain_store_for_db_store!(StoreSnapshot);

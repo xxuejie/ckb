@@ -23,8 +23,9 @@ use ckb_shared::{
     shared::Shared,
     types::{HeaderIndex, HeaderIndexView, SHRINK_THRESHOLD},
 };
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
 use ckb_systemtime::unix_time_as_millis;
+use ckb_traits::ChainStore;
 use ckb_traits::{HeaderFields, HeaderFieldsProvider};
 use ckb_tx_pool::service::TxVerificationResult;
 use ckb_types::BlockNumberAndHash;

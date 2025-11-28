@@ -1,7 +1,8 @@
 use crate::{Node, Spec};
 use ckb_app_config::CKBAppConfig;
 use ckb_logger::info;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::core;
 use ckb_types::core::BlockNumber;
 use ckb_types::packed;

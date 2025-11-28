@@ -4,7 +4,7 @@
 use crate::MockStore;
 use crate::mock_utils::{create_cellbase, dao_data};
 use ckb_chain_spec::consensus::Consensus;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::core::{BlockBuilder, BlockView, HeaderView, TransactionView};
 use ckb_types::utilities::difficulty_to_compact;
 use ckb_types::{U256, packed};

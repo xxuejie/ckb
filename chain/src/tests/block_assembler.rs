@@ -5,7 +5,7 @@ use ckb_chain_spec::consensus::Consensus;
 use ckb_dao_utils::genesis_dao_data;
 use ckb_jsonrpc_types::ScriptHashType;
 use ckb_shared::{ChainServicesBuilder, Shared, SharedBuilder, Snapshot};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_tx_pool::{PlugTarget, TxEntry, block_assembler::CandidateUncles};
 use ckb_types::{
     bytes::Bytes,

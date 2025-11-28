@@ -2,7 +2,7 @@ use ckb_types::core::{BlockNumber, EpochExt, UncleBlockView};
 use std::collections::{BTreeMap, HashSet, btree_map::Entry};
 
 use ckb_snapshot::Snapshot;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 
 #[cfg(not(test))]
 const MAX_CANDIDATE_UNCLES: usize = 128;

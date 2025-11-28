@@ -1,5 +1,5 @@
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{always_success_cell, always_success_consensus, ckb_testnet_consensus};
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{self, Capacity, TransactionBuilder},
     packed::{self, CellDep, CellInput, CellOutputBuilder, OutPoint},

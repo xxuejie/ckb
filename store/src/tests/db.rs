@@ -2,10 +2,11 @@ use ckb_chain_spec::consensus::ConsensusBuilder;
 use ckb_db::RocksDB;
 use ckb_db_schema::{COLUMN_BLOCK_HEADER, COLUMNS};
 use ckb_freezer::Freezer;
+use ckb_traits::ChainStore;
 use ckb_types::{core::BlockExt, packed, prelude::*};
 use tempfile::TempDir;
 
-use crate::{db::ChainDB, store::ChainStore};
+use crate::db::ChainDB;
 
 #[test]
 fn save_and_get_block() {

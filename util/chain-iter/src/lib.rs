@@ -1,5 +1,5 @@
 //! TODO(doc): @quake
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{core::BlockNumber, core::BlockView};
 
 /// TODO(doc): @quake

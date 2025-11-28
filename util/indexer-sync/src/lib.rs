@@ -22,7 +22,7 @@ use ckb_db_schema::{
 use ckb_logger::{error, info};
 use ckb_notify::NotifyController;
 use ckb_stop_handler::{CancellationToken, has_received_stop_signal, new_tokio_exit_rx};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     H256,
     core::{self, BlockNumber, BlockView},

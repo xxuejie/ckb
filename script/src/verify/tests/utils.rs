@@ -4,14 +4,12 @@ use ckb_crypto::secp::{Generator, Privkey, Pubkey, Signature};
 use ckb_db::RocksDB;
 use ckb_db_schema::COLUMNS;
 use ckb_hash::{blake2b_256, new_blake2b};
-use ckb_store::{
-    ChainDB,
-    data_loader_wrapper::{AsDataLoader, DataLoaderWrapper},
-};
+use ckb_store::ChainDB;
 use ckb_test_chain_utils::{
     ckb_testnet_consensus, secp256k1_blake160_sighash_cell, secp256k1_data_cell,
     type_lock_script_code_hash,
 };
+use ckb_traits::{AsDataLoader, DataLoaderWrapper};
 use ckb_types::{
     H256,
     core::{

@@ -2,10 +2,11 @@ use crate::tests::util::start_chain;
 use ckb_chain_spec::consensus::{Consensus, ConsensusBuilder};
 use ckb_dao_utils::genesis_dao_data;
 use ckb_shared::shared::Shared;
-use ckb_store::{ChainStore, attach_block_cell, detach_block_cell};
+use ckb_store::{attach_block_cell, detach_block_cell};
 use ckb_test_chain_utils::{
     MockStore, always_success_cell, calculate_reward, create_always_success_tx,
 };
+use ckb_traits::ChainStore;
 use ckb_types::prelude::*;
 use ckb_types::{
     bytes::Bytes,

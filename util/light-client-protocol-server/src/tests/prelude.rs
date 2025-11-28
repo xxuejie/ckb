@@ -1,5 +1,5 @@
 use ckb_shared::Snapshot;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     U256,
     core::{BlockExt, BlockNumber, BlockView, HeaderView},

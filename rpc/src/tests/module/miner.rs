@@ -1,6 +1,6 @@
 use crate::tests::{RpcTestRequest, always_success_transaction, setup};
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{always_success_cell, always_success_consensus};
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{Capacity, TransactionBuilder, capacity_bytes},
     packed::{self, CellDep, CellInput, CellOutputBuilder, OutPoint},

@@ -4,7 +4,8 @@ use ckb_db_migration::{Migration, ProgressBar, ProgressStyle};
 use ckb_db_schema::COLUMN_CELL;
 use ckb_error::Error;
 use ckb_migration_template::multi_thread_migration;
-use ckb_store::{ChainDB, ChainStore, StoreWriteBatch};
+use ckb_store::{ChainDB, StoreWriteBatch};
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{BlockView, TransactionView},
     packed,

@@ -2,7 +2,8 @@ use ckb_async_runtime::tokio::{self, task::block_in_place};
 use ckb_logger::{debug, info, warn};
 use ckb_shared::Shared;
 use ckb_stop_handler::{CancellationToken, new_tokio_exit_rx};
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::HeaderView,
     packed::{Byte32, CellOutput, OutPoint},

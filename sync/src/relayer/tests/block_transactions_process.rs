@@ -2,7 +2,7 @@ use crate::relayer::block_transactions_process::BlockTransactionsProcess;
 use crate::relayer::tests::helper::{MockProtocolContext, build_chain};
 use crate::{Status, StatusCode};
 use ckb_network::{PeerIndex, SupportProtocols};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_tx_pool::{PlugTarget, TxEntry};
 use ckb_types::prelude::*;
 use ckb_types::{

@@ -11,9 +11,9 @@ use ckb_network::{
 };
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::{Shared, SharedBuilder, Snapshot};
-use ckb_store::ChainStore;
 use ckb_systemtime::{self, unix_time_as_millis};
 use ckb_test_chain_utils::{always_success_cell, always_success_cellbase};
+use ckb_traits::ChainStore;
 use ckb_types::core::cell::resolve_transaction;
 use ckb_types::core::{BlockView, UncleBlockView, capacity_bytes};
 use ckb_types::packed::Script;

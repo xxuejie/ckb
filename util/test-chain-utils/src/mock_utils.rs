@@ -4,7 +4,7 @@ use crate::MockStore;
 use crate::{always_success_cell, load_input_data_hash_cell, load_input_one_byte_cell};
 use ckb_chain_spec::consensus::Consensus;
 use ckb_dao::DaoCalculator;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::prelude::*;
 use ckb_types::{
     bytes::Bytes,

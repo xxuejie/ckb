@@ -3,8 +3,8 @@ use ckb_chain::{ChainController, ChainServiceScope};
 use ckb_dao::DaoCalculator;
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::{Shared, SharedBuilder, Snapshot};
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{always_success_cellbase, always_success_consensus};
+use ckb_traits::ChainStore;
 use ckb_types::prelude::*;
 use ckb_types::{
     core::{BlockBuilder, BlockNumber, TransactionView, cell::resolve_transaction},

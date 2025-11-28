@@ -12,4 +12,4 @@ repository = "https://github.com/nervosnetwork/ckb"
 
 [dependencies]
 ckb-types.workspace = true
-ckb-store.workspace = true
+ckb-traits.workspace = true

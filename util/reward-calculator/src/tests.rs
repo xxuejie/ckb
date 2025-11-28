@@ -2,7 +2,8 @@ use ckb_chain_spec::consensus::{Consensus, ConsensusBuilder, ProposalWindow};
 use ckb_db::RocksDB;
 use ckb_db_schema::COLUMNS;
 use ckb_occupied_capacity::IntoCapacity;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{BlockBuilder, BlockExt, EpochNumberWithFraction, HeaderBuilder, TransactionBuilder},
     packed::ProposalShortId,

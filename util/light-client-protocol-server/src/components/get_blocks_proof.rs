@@ -2,7 +2,7 @@ use std::collections::HashSet;
 
 use ckb_merkle_mountain_range::leaf_index_to_pos;
 use ckb_network::{CKBProtocolContext, PeerIndex};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{packed, prelude::*};
 use std::sync::Arc;
 

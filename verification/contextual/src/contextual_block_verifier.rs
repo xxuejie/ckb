@@ -10,8 +10,7 @@ use ckb_error::{Error, InternalErrorKind};
 use ckb_logger::error_target;
 use ckb_merkle_mountain_range::MMRStore;
 use ckb_reward_calculator::RewardCalculator;
-use ckb_store::{ChainStore, data_loader_wrapper::AsDataLoader};
-use ckb_traits::HeaderProvider;
+use ckb_traits::{AsDataLoader, ChainStore, HeaderProvider};
 use ckb_types::{
     core::error::OutPointError,
     core::{

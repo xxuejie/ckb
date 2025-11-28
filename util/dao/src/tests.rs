@@ -2,7 +2,8 @@ use ckb_chain_spec::consensus::Consensus;
 use ckb_dao_utils::{extract_dao_data, pack_dao_data};
 use ckb_db::RocksDB;
 use ckb_db_schema::COLUMNS;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::{
     U256,
     bytes::Bytes,

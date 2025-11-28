@@ -21,7 +21,7 @@ use ckb_network::{NetworkController, PeerIndex};
 use ckb_script::ChunkCommand;
 use ckb_snapshot::Snapshot;
 use ckb_stop_handler::new_tokio_exit_rx;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{
         BlockView, Cycle, EstimateMode, FeeRate, TransactionView, UncleBlockView, Version,

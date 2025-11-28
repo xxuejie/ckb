@@ -9,8 +9,9 @@ use ckb_merkle_mountain_range::leaf_index_to_mmr_size;
 use ckb_proposal_table::ProposalTable;
 use ckb_shared::Shared;
 use ckb_shared::block_status::BlockStatus;
-use ckb_store::{ChainStore, StoreTransaction, attach_block_cell, detach_block_cell};
+use ckb_store::{StoreTransaction, attach_block_cell, detach_block_cell};
 use ckb_systemtime::unix_time_as_millis;
+use ckb_traits::ChainStore;
 use ckb_tx_pool::TxPoolController;
 use ckb_types::H256;
 use ckb_types::core::cell::{

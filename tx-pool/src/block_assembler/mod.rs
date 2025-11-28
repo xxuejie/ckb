@@ -18,8 +18,8 @@ use ckb_jsonrpc_types::{
 use ckb_logger::{debug, error, trace};
 use ckb_reward_calculator::RewardCalculator;
 use ckb_snapshot::Snapshot;
-use ckb_store::ChainStore;
 use ckb_systemtime::unix_time_as_millis;
+use ckb_traits::ChainStore;
 use ckb_types::{
     bytes,
     core::{

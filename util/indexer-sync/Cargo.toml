@@ -13,12 +13,14 @@ repository = "https://github.com/nervosnetwork/ckb"
 [dependencies]
 ckb-app-config.workspace = true
 ckb-async-runtime.workspace = true
+ckb-db.workspace = true
 ckb-db-schema.workspace = true
 ckb-jsonrpc-types.workspace = true
 ckb-logger.workspace = true
 ckb-notify.workspace = true
 ckb-stop-handler.workspace = true
 ckb-store.workspace = true
+ckb-traits.workspace = true
 ckb-types.workspace = true
 numext-fixed-uint.workspace = true
 rhai = { workspace = true, features = ["no_function", "no_float", "no_module", "sync"] }

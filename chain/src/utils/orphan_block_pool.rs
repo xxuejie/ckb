@@ -1,6 +1,7 @@
 use crate::LonelyBlockHash;
 use ckb_logger::debug;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::core::{BlockView, EpochNumber};
 use ckb_types::packed;
 use ckb_util::{parking_lot::RwLock, shrink_to_fit};

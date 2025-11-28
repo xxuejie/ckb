@@ -1,7 +1,7 @@
 use crate::StoreSnapshot;
 use crate::cache::StoreCache;
 use crate::cell::attach_block_cell;
-use crate::store::ChainStore;
+use crate::store::DatabaseStore;
 use crate::transaction::StoreTransaction;
 use crate::write_batch::StoreWriteBatch;
 use ckb_app_config::StoreConfig;
@@ -13,6 +13,7 @@ use ckb_db::{
 use ckb_db_schema::{CHAIN_SPEC_HASH_KEY, Col, MIGRATION_VERSION_KEY};
 use ckb_error::{Error, InternalErrorKind};
 use ckb_freezer::Freezer;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{BlockExt, EpochExt, HeaderView, TransactionView},
     packed,
@@ -29,7 +30,7 @@ pub struct ChainDB {
     cache: Arc<StoreCache>,
 }
 
-impl ChainStore for ChainDB {
+impl DatabaseStore for ChainDB {
     fn cache(&self) -> Option<&StoreCache> {
         Some(&self.cache)
     }
@@ -48,6 +49,7 @@ impl ChainStore for ChainDB {
         self.db.iter(col, mode).expect("db operation should be ok")
     }
 }
+crate::impl_chain_store_for_db_store!(ChainDB);
 
 impl VersionbitsIndexer for ChainDB {
     fn block_epoch_index(&self, block_hash: &packed::Byte32) -> Option<packed::Byte32> {

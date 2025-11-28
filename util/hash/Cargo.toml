@@ -9,7 +9,7 @@ homepage = "https://github.com/nervosnetwork/ckb"
 repository = "https://github.com/nervosnetwork/ckb"
 
 [features]
-default = ["blake2b-ref", "blake2b-rs"]
+default = ["blake2b-ref", "ckb-contract"]
 ckb-contract = [
     "blake2b-ref",
 ] # This feature is used for CKB contract development

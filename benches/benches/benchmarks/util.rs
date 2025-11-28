@@ -4,9 +4,9 @@ use ckb_crypto::secp::Privkey;
 use ckb_dao::DaoCalculator;
 use ckb_dao_utils::genesis_dao_data;
 use ckb_shared::{Shared, SharedBuilder, Snapshot};
-use ckb_store::ChainStore;
 use ckb_system_scripts::BUNDLED_CELL;
 use ckb_test_chain_utils::always_success_cell;
+use ckb_traits::ChainStore;
 use ckb_types::{
     H160, H256, U256,
     bytes::Bytes,

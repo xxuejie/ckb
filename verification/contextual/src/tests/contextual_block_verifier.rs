@@ -4,8 +4,9 @@ use ckb_chain::ChainServiceScope;
 use ckb_chain_spec::consensus::{Consensus, ConsensusBuilder};
 use ckb_error::assert_error_eq;
 use ckb_shared::{Shared, SharedBuilder};
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
 use ckb_test_chain_utils::always_success_cell;
+use ckb_traits::ChainStore;
 use ckb_types::{
     bytes::Bytes,
     core::{

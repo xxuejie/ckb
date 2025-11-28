@@ -7,7 +7,7 @@ use ckb_dao_utils::genesis_dao_data;
 use ckb_jsonrpc_types::JsonBytes;
 use ckb_network::{Flags, NetworkController, NetworkService, NetworkState, network::TransportType};
 use ckb_shared::{Shared, SharedBuilder};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     U256,
     bytes::Bytes,

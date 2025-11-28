@@ -3,11 +3,11 @@ use ckb_chain_spec::consensus::{Consensus, ConsensusBuilder};
 use ckb_dao_utils::genesis_dao_data;
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::shared::Shared;
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{
     MockStore, always_success_cell, calculate_reward, create_always_success_out_point,
     create_always_success_tx, dao_data,
 };
+use ckb_traits::ChainStore;
 use ckb_types::prelude::*;
 use ckb_types::{
     bytes::Bytes,

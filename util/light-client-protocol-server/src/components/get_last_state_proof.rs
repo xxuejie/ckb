@@ -6,7 +6,7 @@ use std::{
 use ckb_merkle_mountain_range::leaf_index_to_pos;
 use ckb_network::{CKBProtocolContext, PeerIndex};
 use ckb_shared::Snapshot;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{U256, core::BlockNumber, packed, prelude::*};
 
 use crate::{LightClientProtocol, Status, StatusCode, constant};

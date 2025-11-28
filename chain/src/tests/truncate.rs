@@ -1,8 +1,8 @@
 use crate::ChainServiceScope;
 use ckb_chain_spec::consensus::Consensus;
 use ckb_shared::SharedBuilder;
-use ckb_store::ChainStore;
 use ckb_test_chain_utils::{MockChain, MockStore};
+use ckb_traits::ChainStore;
 use ckb_verification_traits::Switch;
 use std::sync::Arc;
 

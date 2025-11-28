@@ -4,7 +4,7 @@ use ckb_chain_spec::consensus::Consensus;
 use ckb_dao::DaoCalculator;
 use ckb_dao_utils::DaoError;
 use ckb_logger::debug;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{BlockReward, Capacity, CapacityResult, HeaderView},
     packed::{Byte32, CellbaseWitness, ProposalShortId, Script},

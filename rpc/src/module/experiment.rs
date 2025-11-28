@@ -7,7 +7,7 @@ use ckb_jsonrpc_types::{
     Uint64,
 };
 use ckb_shared::{Snapshot, shared::Shared};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{core, packed};
 use jsonrpc_core::Result;
 use jsonrpc_utils::rpc;

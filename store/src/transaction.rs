@@ -1,5 +1,5 @@
 use crate::cache::StoreCache;
-use crate::store::ChainStore;
+use crate::store::DatabaseStore;
 use ckb_chain_spec::versionbits::VersionbitsIndexer;
 use ckb_db::{
     DBPinnableSlice, RocksDBTransaction, RocksDBTransactionSnapshot,
@@ -16,6 +16,7 @@ use ckb_db_schema::{
 use ckb_error::Error;
 use ckb_freezer::Freezer;
 use ckb_merkle_mountain_range::{Error as MMRError, MMRStore, Result as MMRResult};
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{
         BlockExt, BlockView, EpochExt, HeaderView, TransactionView,
@@ -34,7 +35,7 @@ pub struct StoreTransaction {
     pub(crate) cache: Arc<StoreCache>,
 }
 
-impl ChainStore for StoreTransaction {
+impl DatabaseStore for StoreTransaction {
     fn cache(&self) -> Option<&StoreCache> {
         Some(&self.cache)
     }
@@ -55,6 +56,7 @@ impl ChainStore for StoreTransaction {
             .expect("db operation should be ok")
     }
 }
+crate::impl_chain_store_for_db_store!(StoreTransaction);
 
 impl VersionbitsIndexer for StoreTransaction {
     fn block_epoch_index(&self, block_hash: &Byte32) -> Option<Byte32> {
@@ -107,7 +109,7 @@ pub struct StoreTransactionSnapshot<'a> {
     pub(crate) cache: Arc<StoreCache>,
 }
 
-impl<'a> ChainStore for StoreTransactionSnapshot<'a> {
+impl<'a> DatabaseStore for StoreTransactionSnapshot<'a> {
     fn cache(&self) -> Option<&StoreCache> {
         Some(&self.cache)
     }
@@ -128,6 +130,7 @@ impl<'a> ChainStore for StoreTransactionSnapshot<'a> {
             .expect("db operation should be ok")
     }
 }
+crate::impl_chain_store_for_db_store!(StoreTransactionSnapshot<'a>, <'a>);
 
 impl StoreTransaction {
     /// TODO(doc): @quake

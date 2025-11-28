@@ -19,7 +19,8 @@ use ckb_notify::{NotifyController, NotifyService};
 use ckb_proposal_table::ProposalTable;
 use ckb_proposal_table::ProposalView;
 use ckb_snapshot::{Snapshot, SnapshotMgr};
-use ckb_store::{ChainDB, ChainStore, Freezer};
+use ckb_store::{ChainDB, Freezer};
+use ckb_traits::ChainStore;
 use ckb_tx_pool::{
     TokioRwLock, TxEntry, TxPool, TxPoolServiceBuilder, service::TxVerificationResult,
 };

@@ -8,7 +8,7 @@ use ckb_jsonrpc_types::{
 use ckb_logger::error;
 use ckb_network::{NetworkController, SupportProtocols};
 use ckb_shared::{Snapshot, shared::Shared};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{
     H256,
     core::{

@@ -20,6 +20,7 @@ lru.workspace = true
 ckb-dao.workspace = true
 ckb-reward-calculator.workspace = true
 ckb-store.workspace = true
+ckb-traits.workspace = true
 ckb-util.workspace = true
 ckb-jsonrpc-types.workspace = true
 ckb-chain-spec.workspace = true

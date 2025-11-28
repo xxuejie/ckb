@@ -3,7 +3,7 @@ use crate::utils::async_send_message_to;
 use crate::{Status, StatusCode};
 use ckb_logger::debug_target;
 use ckb_network::{CKBProtocolContext, PeerIndex};
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{packed, prelude::*};
 use std::sync::Arc;
 

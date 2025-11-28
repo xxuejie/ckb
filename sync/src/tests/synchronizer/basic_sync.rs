@@ -13,9 +13,9 @@ use ckb_logger::info;
 use ckb_network::SupportProtocols;
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::{Shared, SharedBuilder};
-use ckb_store::ChainStore;
 use ckb_systemtime::{self, unix_time_as_millis};
 use ckb_test_chain_utils::always_success_cell;
+use ckb_traits::ChainStore;
 use ckb_types::prelude::*;
 use ckb_types::{
     U256,

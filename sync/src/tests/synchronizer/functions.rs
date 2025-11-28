@@ -10,8 +10,8 @@ use ckb_network::{
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::types::HeaderIndex;
 use ckb_shared::{Shared, SharedBuilder, Snapshot};
-use ckb_store::ChainStore;
 use ckb_systemtime::unix_time_as_millis;
+use ckb_traits::ChainStore;
 use ckb_types::{
     U256,
     core::{

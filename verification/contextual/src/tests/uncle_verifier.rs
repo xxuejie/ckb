@@ -6,7 +6,8 @@ use ckb_chain::ChainServiceScope;
 use ckb_chain_spec::consensus::Consensus;
 use ckb_error::assert_error_eq;
 use ckb_shared::{Shared, SharedBuilder};
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::{
     core::{
         BlockBuilder, BlockNumber, BlockView, EpochExt, HeaderView, TransactionBuilder,

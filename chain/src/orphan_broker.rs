@@ -8,7 +8,7 @@ use ckb_logger::internal::trace;
 use ckb_logger::{debug, error, info};
 use ckb_shared::Shared;
 use ckb_shared::block_status::BlockStatus;
-use ckb_store::ChainStore;
+use ckb_traits::ChainStore;
 use ckb_types::{U256, packed::Byte32};
 use dashmap::DashSet;
 use std::sync::Arc;

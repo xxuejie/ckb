@@ -10,8 +10,8 @@ use ckb_jsonrpc_types::{
 use ckb_logger::error;
 use ckb_reward_calculator::RewardCalculator;
 use ckb_shared::{Snapshot, shared::Shared};
-use ckb_store::{ChainStore, data_loader_wrapper::AsDataLoader};
 use ckb_traits::HeaderFieldsProvider;
+use ckb_traits::{AsDataLoader, ChainStore};
 use ckb_types::core::tx_pool::TransactionWithStatus;
 use ckb_types::{
     H256,

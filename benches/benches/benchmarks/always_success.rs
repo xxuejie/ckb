@@ -1,5 +1,5 @@
 use crate::benchmarks::util::{gen_always_success_block, new_always_success_chain};
-use ckb_store::{self, ChainStore};
+use ckb_traits::ChainStore;
 use ckb_verification_traits::Switch;
 use criterion::{BatchSize, BenchmarkId, Criterion, criterion_group};
 use std::sync::Arc;

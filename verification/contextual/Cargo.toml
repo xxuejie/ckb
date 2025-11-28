@@ -10,7 +10,6 @@ repository = "https://github.com/nervosnetwork/ckb"
 
 [dependencies]
 ckb-types.workspace = true
-ckb-store.workspace = true
 ckb-systemtime.workspace = true
 rayon.workspace = true
 ckb-traits.workspace = true
@@ -29,6 +28,7 @@ ckb-merkle-mountain-range.workspace = true
 [dev-dependencies]
 ckb-chain.workspace = true
 ckb-shared.workspace = true
+ckb-store.workspace = true
 ckb-test-chain-utils.workspace = true
 ckb-systemtime = { workspace = true, features = ["enable_faketime"] }
 rand.workspace = true

@@ -2,7 +2,8 @@ use ckb_app_config::StoreConfig;
 use ckb_db::{Result, RocksDB};
 use ckb_db_migration::{Migration, ProgressBar, ProgressStyle};
 use ckb_error::InternalErrorKind;
-use ckb_store::{ChainDB, ChainStore};
+use ckb_store::ChainDB;
+use ckb_traits::ChainStore;
 use ckb_types::utilities::merkle_mountain_range::ChainRootMMR;
 use std::sync::Arc;
 
