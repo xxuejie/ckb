@@ -1,0 +1,8 @@
+[package]
+name = "stf-program"
+edition = "2024"
+version.workspace = true
+
+[dependencies]
+ckb-types.workspace = true
+ckb-verification-contextual.workspace = true

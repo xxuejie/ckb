@@ -112,6 +112,7 @@ members = [
     "devtools/doc/rpc-gen",
     "ckb-bin",
     "test",
+    "stf/program",
 ]
 
 [workspace.package]
@@ -337,3 +338,6 @@ profiling = ["tikv-jemallocator/profiling", "ckb-bin/profiling"]
 portable = ["ckb-bin/portable"]
 march-native = ["ckb-bin/march-native"]
 tokio-trace = ["console-subscriber"]
+
+[patch.crates-io]
+getrandom = { git = "https://github.com/sp1-patches/getrandom", branch = "0.1-zkvm" }
